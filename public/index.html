@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Realizar un Pago</title>
+    <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body>
+    <h1>Realizar un Pago</h1>
+    <label for="amount">Monto (en centavos):</label>
+    <input type="number" id="amount" value="5000"> <!-- $50.00 -->
+    
+    <label for="quantity">Cantidad:</label>
+    <input type="number" id="quantity" value="1">
+
+    <button id="checkout-button">Pagar</button>
+
+    <script>
+        const stripe = Stripe('pk_test_51Q6T2CRpc8bbsTVvFKN1iWX6Ejm3ZU6uquCqzuHFgMImCWCYLoCpZWZXlfUhuZ2EYaxF4PbAC6NnybXjg5ZCFYHF00UO05adDl');
+
+        document.getElementById('checkout-button').addEventListener('click', async () => {
+            const amount = parseInt(document.getElementById('amount').value); 
+            const quantity = parseInt(document.getElementById('quantity').value); 
+
+            const response = await fetch('/api/session/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ amount, quantity }),
+            });
+
+            const sessionId = await response.json();
+
+            const { error } = await stripe.redirectToCheckout({ sessionId: sessionId.id });
+
+            if (error) {
+                console.error('Error:', error);
+            }
+        });
+    </script>
+</body>
+</html>
