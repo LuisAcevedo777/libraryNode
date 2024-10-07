@@ -1,645 +1,570 @@
 {
-"openapi": "3.0.0",
-"info": {
-"title": "Library API",
-"description": "Una API para obtener libros en calidad de prestamo, así mismo puedes comprarlos",
-"version": "1.0.0"
-},
-"paths":{
- 
-    "/api/loans/:userId/:bookId":{
-    "post":{ 
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Library API",
+    "description": "Una API para obtener libros en calidad de prestamo, así mismo puedes comprarlos",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/api/loans/:userId/:bookId": {
+      "post": {
         "tags": ["Loans"],
-    "description": "Con este endpoint puedes crear prestamos de libros",
-    "summary": "Crea un nuevo prestamo",
-    "parameters":[
-        {"name": "userId", "in": "path", "required": true, "description": "El id del usuario que tomara prestado un libro"},
-        {"name": "bookId", "in": "path", "required": true, "description": "El id del libro que se quiere tomar prestado"}
-
-    ],
-    "requestBody": {
-    "description": "Los campos para crear un nuevo prestamo son: userId, bookId, loanDate, returnDate",
-    "required": true,
-    "content": { 
-    "application/json": {
-        "schema":{"$ref": "#/components/schemas/loan"}}
-    }
-    },
-    "responses": {
-    
-        "201": {
-    
+        "description": "Con este endpoint puedes crear prestamos de libros",
+        "summary": "Crea un nuevo prestamo",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "description": "El id del usuario que tomara prestado un libro"
+          },
+          {
+            "name": "bookId",
+            "in": "path",
+            "required": true,
+            "description": "El id del libro que se quiere tomar prestado"
+          }
+        ],
+        "requestBody": {
+          "description": "Los campos para crear un nuevo prestamo son: userId, bookId, loanDate, returnDate",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/loan" }
+            }
+          }
+        },
+        "responses": {
+          "201": {
             "description": "created"
-        },
-        "409": {
-    
-        "description": "conflict",
-        "content":{
-            "application/json":{
-    
-                "schema":{
-    
-                    "type": "object",
-                    "properties":{
-    
-                        "name":{
-    
-                            "type": "string",
-                            "example": "validation error"
-                        },
-                        "message": {
-                              
-                            "type": "string",
-                            "example": "validation error"
-                      
-                        }
-                    }
-                }
-            }
-        }
-    }
-      }
-        },
-        "put":{ 
-        "tags": ["Loans"],
-    "description": "Con este endpoint puedes actualizar el prestamo de libros",
-    "summary": "Actualiza el prestamo del libro",
-    "parameters":[
-        {"name": "userId", "in": "path", "required": true, "description": "El id del usuario que tomara prestado un libro"},
-        {"name": "bookId", "in": "path", "required": true, "description": "El id del libro que se quiere tomar prestado"}
-
-    ],
-    "requestBody": {
-    "description": "Los campos para actualizar un prestamo son: userId, bookId, loanDate, returnDate",
-    "required": true,
-    "content": { 
-    "application/json": {
-        "schema":{"$ref": "#/components/schemas/loan"}}
-    }
-    },
-    "responses": {
-    
-        "201": {
-    
-            "description": "updated"
-        },
-        "409": {
-    
-        "description": "conflict",
-        "content":{
-            "application/json":{
-    
-                "schema":{
-    
-                    "type": "object",
-                    "properties":{
-    
-                        "name":{
-    
-                            "type": "string",
-                            "example": "validation error"
-                        },
-                        "message": {
-                              
-                            "type": "string",
-                            "example": "validation error"
-                      
-                        }
-                    }
-                }
-            }
-        }
-    }
-      }
-        }
-
-},
-
-"/api/books":{ 
-
-"get":{ 
-  "tags": ["Books"],
-"description": "Con este endpoint puedes obtener todos los libros de la base de datos",
-"summary": "Obtén todos los libros en la base de datos",
-"requestBody": {
-
-"content": { 
-"application/json": {
-  "example": "/api/books/"}
-}
-},
-"responses": {
-
-  "200": {
-
-      "description": "ok"
-  },
-  "400": {
-
-  "description": "bad request",
-  "content":{
-      "application/json":{
-
-          "schema":{
-
-              "type": "object",
-              "properties":{
-
-                  "name":{
-
+          },
+          "409": {
+            "description": "conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
                       "type": "string",
                       "example": "validation error"
-                  },
-                  "message": {
-                        
-                      "type": "string",
-                      "example": "validation error"
-                
-                  }
-              }
-          }
-      }
-  }
-}
-}
-  },
-  "post":{ 
-    "tags": ["Books"],
-"description": "Con este endpoint puedes crear un libro" ,
-"summary": "Crea un nuevo libro",
-"requestBody": {
-"description": "Los campos para crear un nuevo LIBRO son: title, author, publicationYear",
-"required": true,
-"content": { 
-"application/json": {
-    "schema":{"$ref": "#/components/schemas/book"}}
-}
-},
-"responses": {
-
-    "201": {
-
-        "description": "created"
-    },
-    "409": {
-
-    "description": "conflict",
-    "content":{
-        "application/json":{
-
-            "schema":{
-
-                "type": "object",
-                "properties":{
-
-                    "name":{
-
-                        "type": "string",
-                        "example": "database error connection"
                     },
                     "message": {
-                          
-                        "type": "string",
-                        "example": "database error connection"
-                  
+                      "type": "string",
+                      "example": "validation error"
                     }
+                  }
                 }
+              }
             }
+          }
         }
-    }
-}
-  }
-    }
-
-},
-"/api/books/{id}":{
-"get":{ 
-  "tags": ["Books"],
-"description": "Con este endpoint puedes obtener un libro con el id que pases como parametro",
-"summary": "Obtén un libro",
-"parameters": [
-
-    {"name": "id", "in": "path", "required": true, "description": "El id del libro que se quiere obtener"}
-    
-],
-"requestBody": {
-"description": "El id debe ser un número",
-"required": true,
-"content": { 
-"application/json": {
-  "example":"/api/books/1"}
-}
-},
-"responses": {
-
-  "200": {
-
-      "description": "ok"
-  },
-  "400": {
-
-  "description": "bad request",
-  "content":{
-      "application/json":{
-
-          "schema":{
-
-              "type": "object",
-              "properties":{
-
-                  "name":{
-
-                      "type": "string",
-                      "example": "validation error"
-                  },
-                  "message": {
-                        
-                      "type": "string",
-                      "example": "validation error"
-                
-                  }
-              }
-          }
-      }
-  }
-}
-}
-  },
-  "delete":{ 
-  "tags": ["Books"],
-"description": "Con este endpoint puedes eliminar un libro con el id que pases como parametro",
-"summary": "Elimina un libro",
-"parameters": [
-
-    {"name": "id", "in": "path", "required": true, "description": "El id del libro que se quiere eliminar"}
-    
-],
-"requestBody": {
-"description": "El id debe ser un número",
-"required": true,
-"content": { 
-"application/json": {
-  "example":"/api/books/1"}
-}
-},
-"responses": {
-
-  "204": {
-
-      "description": "Realizado"
-  },
-  "400": {
-
-  "description": "bad request",
-  "content":{
-      "application/json":{
-
-          "schema":{
-
-              "type": "object",
-              "properties":{
-
-                  "name":{
-
-                      "type": "string",
-                      "example": "validation error"
-                  },
-                  "message": {
-                        
-                      "type": "string",
-                      "example": "validation error"
-                
-                  }
-              }
-          }
-      }
-  }
-}
-}
-  },
-  "put":{ 
-  "tags": ["Books"],
-"description": "Con este endpoint puedes Actualizr un libro con el id que pases como parametro",
-"summary": "Obtén un libro",
-"parameters": [
-
-    {"name": "id", "in": "path", "required": true, "description": "El id del libro que se quiere Actualizar"}
-    
-],
-"requestBody": {
-"description": "El id debe ser un número",
-"required": true,
-"content": { 
-"application/json": {
-  "example":"/api/books/1",
-  "schema":{"$ref": "#/components/schemas/book"}    
-}
-}
-},
-"responses": {
-
-  "204": {
-
-      "description": "Realizado"
-  },
-  "400": {
-
-  "description": "bad request",
-  "content":{
-      "application/json":{
-
-          "schema":{
-
-              "type": "object",
-              "properties":{
-
-                  "name":{
-
-                      "type": "string",
-                      "example": "validation error"
-                  },
-                  "message": {
-                        
-                      "type": "string",
-                      "example": "validation error"
-                
-                  }
-              }
-          }
-      }
-  }
-}
-}
-  }
-     
-},
-  
-"/api/auth/login/":{ 
-
-"post":{ 
-  "tags": ["Authentication"],
-"description": "Con este endpoint Obtén acceso al aplicativo como usuario",
-"summary": "Autenticate como usuario",
-"requestBody": {
-"description": "Los campos para autenticación, son: email, password",
-"required": true,
-"content": { 
-"application/json": {
-  "schema":{"$ref": "#/components/schemas/login"}}
-}
-},
-"responses": {
-
-  "200": {
-
-      "description": "authenticated"
-  },
-  "409": {
-
-  "description": "conflict",
-  "content":{
-      "application/json":{
-
-          "schema":{
-
-              "type": "object",
-              "properties":{
-
-                  "name":{
-
-                      "type": "string",
-                      "example": "database error connection, validation error"
-                  },
-                  "message": {
-                        
-                      "type": "string",
-                      "example": "database error connection, validation error"
-                
-                  }
-              }
-          }
-      }
-  }
-}
-}
-  }
-},
-
-"/api/auth/register/":{
-
-    "post":{ 
-        "tags": ["Authentication"],
-      "description": "Con este endpoint puedes registrarte en el aplicativo como usuario",
-      "summary": "Registrate como usuario",
-      "requestBody": {
-      "description": "Los campos para registro, son: name, email, password",
-      "required": true,
-      "content": { 
-      "application/json": {
-        "schema":{"$ref": "#/components/schemas/register"}}
-      }
       },
-      "responses": {
-      
-        "200": {
-      
-            "description": "registred"
-        },
-        "409": {
-      
-        "description": "conflict",
-        "content":{
-            "application/json":{
-      
-                "schema":{
-      
-                    "type": "object",
-                    "properties":{
-      
-                        "name":{
-      
-                            "type": "string",
-                            "example": "database error connection, validation error"
-                        },
-                        "message": {
-                              
-                            "type": "string",
-                            "example": "database error connection, validation error"
-                      
-                        }
-                    }
-                }
+      "put": {
+        "tags": ["Loans"],
+        "description": "Con este endpoint puedes actualizar el prestamo de libros",
+        "summary": "Actualiza el prestamo del libro",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "description": "El id del usuario que tomara prestado un libro"
+          },
+          {
+            "name": "bookId",
+            "in": "path",
+            "required": true,
+            "description": "El id del libro que se quiere tomar prestado"
+          }
+        ],
+        "requestBody": {
+          "description": "Los campos para actualizar un prestamo son: userId, bookId, loanDate, returnDate",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/loan" }
             }
-        }
-      }
-      }
-        }
-
-}
-},
-
-"/api/session/":{
-"post":{ 
-    "tags": ["Payment"],
-"description": "Con este endpoint puedes crear una pasarela de pago",
-"summary": "Crea una pasarela de pago",
-"requestBody": {
-"description": "Los campos para crear una pasarela de pago son: amount, quantity",
-"required": true,
-"content": { 
-"application/json": {
-    "schema":{"$ref": "#/components/schemas/payment"}}
-}
-},
-"responses": {
-
-"content":{
-        "application/json":{
-
-            "schema":{
-
-                "properties":{
-
-                    "id":{
-
-                        "type": "string",
-                        "example": "sessionId"
-                        
-                    } }              
-                    }
-                 }
-                },
-
-    
-    "409": {
-
-    "description": "conflict",
-    "content":{
-        "application/json":{
-
-            "schema":{
-
-                "type": "object",
-                "properties":{
-
-                    "name":{
-
-                        "type": "string",
-                        "example": "database error connection"
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "updated"
+          },
+          "409": {
+            "description": "conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "example": "validation error"
                     },
                     "message": {
-                          
-                        "type": "string",
-                        "example": "database error connection"
-                  
+                      "type": "string",
+                      "example": "validation error"
                     }
+                  }
                 }
-            }
-        }
-    }
-}
-  }
-    }
-
-},
-
-"components": {
- 
-    "schemas":{
-        "login": {
-             "description": "Contrasena",       
-            
-            "properties": {
-
-                "email": {
-                  "example": "juan@gmail.com",
-                "type": "string"
-            },
-              "password":{
-                 "example": "123456",
-                "type": "string"
               }
+            }
+          }
         }
+      }
+    },
+
+    "/api/books": {
+      "get": {
+        "tags": ["Books"],
+        "description": "Con este endpoint puedes obtener todos los libros de la base de datos",
+        "summary": "Obtén todos los libros en la base de datos",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "example": "/api/books/"
+            }
+          }
         },
-        "register": {
-            "description": "Registro de usuario",       
-           "type": "object",
-           "properties": {
-              "name": {
-                 "example": "juan",
-               "type": "string"
-           },
-               "email": {
-                 "example": "juan@gmail.com",
-               "type": "string"
-           },
-             "password":{
-                "example": "123456",
-               "type": "string"
-             }
-       }
-       },
-        "book": {
-            "description": "Title y Author deben ser hasta 25 characteres de longitud",       
-           "type": "object",
-           "properties": {
+        "responses": {
+          "200": {
+            "description": "ok"
+          },
+          "400": {
+            "description": "bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "example": "validation error"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "validation error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Books"],
+        "description": "Con este endpoint puedes crear un libro",
+        "summary": "Crea un nuevo libro",
+        "requestBody": {
+          "description": "Los campos para crear un nuevo LIBRO son: title, author, publicationYear",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/book" }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "created"
+          },
+          "409": {
+            "description": "conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "example": "database error connection"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "database error connection"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/books/{id}": {
+      "get": {
+        "tags": ["Books"],
+        "description": "Con este endpoint puedes obtener un libro con el id que pases como parametro",
+        "summary": "Obtén un libro",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "El id del libro que se quiere obtener"
+          }
+        ],
+        "requestBody": {
+          "description": "El id debe ser un número",
+          "required": true,
+          "content": {
+            "application/json": {
+              "example": "/api/books/1"
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "ok"
+          },
+          "400": {
+            "description": "bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "example": "validation error"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "validation error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Books"],
+        "description": "Con este endpoint puedes eliminar un libro con el id que pases como parametro",
+        "summary": "Elimina un libro",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "El id del libro que se quiere eliminar"
+          }
+        ],
+        "requestBody": {
+          "description": "El id debe ser un número",
+          "required": true,
+          "content": {
+            "application/json": {
+              "example": "/api/books/1"
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Realizado"
+          },
+          "400": {
+            "description": "bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "example": "validation error"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "validation error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["Books"],
+        "description": "Con este endpoint puedes Actualizr un libro con el id que pases como parametro",
+        "summary": "Obtén un libro",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "El id del libro que se quiere Actualizar"
+          }
+        ],
+        "requestBody": {
+          "description": "El id debe ser un número",
+          "required": true,
+          "content": {
+            "application/json": {
+              "example": "/api/books/1",
+              "schema": { "$ref": "#/components/schemas/book" }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Realizado"
+          },
+          "400": {
+            "description": "bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "example": "validation error"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "validation error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
 
-               "title": {
+    "/api/auth/login/": {
+      "post": {
+        "tags": ["Authentication"],
+        "description": "Con este endpoint Obtén acceso al aplicativo como usuario",
+        "summary": "Autenticate como usuario",
+        "requestBody": {
+          "description": "Los campos para autenticación, son: email, password",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/login" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "authenticated"
+          },
+          "409": {
+            "description": "conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "example": "database error connection, validation error"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "database error connection, validation error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
 
-                   "type":"string",
-                   "example": "Bodas de ayer"
-               },
-               "author": {
-                 "example": "Juan Colorado",
-               "type": "string"
-           },
-             "publicationYear":{
-                "example": 1980,
-               "type": "integer"
-             }
-       }
-       },
-       "loan": {
-            "description": "userId y bookId deben ser numeros",       
-           "type": "object",
-           "properties": {
-
-               "userId": {
-
-                   "type":"integer",
-                   "example": 2
-               },
-               "bookId": {
-                 "example": "5",
-               "type": "integer"
-           },
-             "loanDate":{
-                "example": "01/11/2001",
-               "type": "integer"
-             },
-             "returnDate":{
-                "example": "01/08/2002",
-               "type": "integer"
-             }
-       }
-       },  
-        "payment": {
-        "description": "Pasarela de pago",       
-       "type": "object",
-       "properties": {
-
-           "amount": {
-             "example": 10000,
-           "type": "integer"
-       },
-         "quantity":{
-            "example": 5,
-           "type": "integer"
-         }
-   }
-   }
+    "/api/auth/register/": {
+      "post": {
+        "tags": ["Authentication"],
+        "description": "Con este endpoint puedes registrarte en el aplicativo como usuario",
+        "summary": "Registrate como usuario",
+        "requestBody": {
+          "description": "Los campos para registro, son: name, email, password",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/register" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "registred"
+          },
+          "409": {
+            "description": "conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "example": "database error connection, validation error"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "database error connection, validation error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/session/": {
+      "post": {
+        "tags": ["Payment"],
+        "description": "Con este endpoint puedes crear una pasarela de pago",
+        "summary": "Crea una pasarela de pago",
+        "requestBody": {
+          "description": "Los campos para crear una pasarela de pago son: amount, quantity",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/payment" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "session created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "sessionId"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "example": "database error connection"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "database error connection"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
-}
+  },
 
+  "components": {
+    "schemas": {
+      "login": {
+        "description": "Contrasena",
 
+        "properties": {
+          "email": {
+            "example": "juan@gmail.com",
+            "type": "string"
+          },
+          "password": {
+            "example": "123456",
+            "type": "string"
+          }
+        }
+      },
+      "register": {
+        "description": "Registro de usuario",
+        "type": "object",
+        "properties": {
+          "name": {
+            "example": "juan",
+            "type": "string"
+          },
+          "email": {
+            "example": "juan@gmail.com",
+            "type": "string"
+          },
+          "password": {
+            "example": "123456",
+            "type": "string"
+          }
+        }
+      },
+      "book": {
+        "description": "Title y Author deben ser hasta 25 characteres de longitud",
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "Bodas de ayer"
+          },
+          "author": {
+            "example": "Juan Colorado",
+            "type": "string"
+          },
+          "publicationYear": {
+            "example": 1980,
+            "type": "integer"
+          }
+        }
+      },
+      "loan": {
+        "description": "userId y bookId deben ser numeros",
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "integer",
+            "example": 2
+          },
+          "bookId": {
+            "example": "5",
+            "type": "integer"
+          },
+          "loanDate": {
+            "example": "01/11/2001",
+            "type": "integer"
+          },
+          "returnDate": {
+            "example": "01/08/2002",
+            "type": "integer"
+          }
+        }
+      },
+      "payment": {
+        "description": "Pasarela de pago",
+        "type": "object",
+        "properties": {
+          "amount": {
+            "example": 10000,
+            "type": "integer"
+          },
+          "quantity": {
+            "example": 5,
+            "type": "integer"
+          }
+        }
+      }
+    }
+  }
 }

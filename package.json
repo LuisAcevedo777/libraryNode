@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "node ./src/app.js",
-    "dev": "nodemon ./src/app.js",
-    "seed": "node ./src/seeders.js",
+    "start": "node ./src/lib/app.js",
+    "dev": "nodemon ./src/lib/app.js",
+    "seed": "node ./src/lib/seeders.js",
     "test": "jest"
   },
   "keywords": [],
@@ -30,8 +30,10 @@
     "swagger-ui-express": "^5.0.1"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
     "@types/express": "^5.0.0",
     "@types/jest": "^29.5.13",
+    "@types/jsonwebtoken": "^9.0.7",
     "@types/node": "^22.7.4",
     "@types/sequelize": "^4.28.20",
     "jest": "^29.7.0",
